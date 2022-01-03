@@ -1,5 +1,6 @@
 enum PathDirection
 {
+    None,
     Up,
     Down,
     Left,

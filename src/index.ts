@@ -1,9 +1,8 @@
+import { map1 } from "./maps";
 import { NEW_LINE } from "./types/Constants";
 import PathDirection from "./types/PathDirection";
 import IPathResult from "./types/PathResult";
 import PathSpecialChar from "./types/PathSpecialChar";
-
-console.log('hello world!');
 
 interface ICoordinate
 {
@@ -34,7 +33,7 @@ function validateCharUniquenes(map: string, char: PathSpecialChar)
 
 function preparMapArray(map: string): Array<string[]>
 {
-    return map.split(NEW_LINE).map(x => x.split(''));
+    return map.trim().split(NEW_LINE).map(x => x.split(''));
 }
 
 function findStart(matrix: Array<string[]>): ICharInfo
@@ -65,9 +64,84 @@ function findStart(matrix: Array<string[]>): ICharInfo
     throw new Error(`Missing char: ${PathSpecialChar.Start}`)
 }
 
-function goToNext(matrix: Array<string[]>, current: ICharInfo, path: ICharInfo[]): void
+function getNextPosition(coordinate: ICoordinate, direction: PathDirection): ICoordinate
 {
+    let x = coordinate.x, y = coordinate.y;
+    switch(direction)
+    {
+        case PathDirection.Left:
+            x = x - 1;
+            break;
+        case PathDirection.Right:
+            x = x + 1;
+            break;
+        case PathDirection.Up:
+            y = y - 1;
+            break;
+        case PathDirection.Down:
+            y = y + 1;
+            break;
+    }
 
+    return {
+        x,
+        y
+    };
+}
+
+function getNextDirection(matrix: Array<string[]>, directionFrom: PathDirection, charPosition: ICoordinate): PathDirection
+{
+    const {x, y} = charPosition;
+    if(directionFrom === PathDirection.Left || directionFrom === PathDirection.Right)
+    {
+        const above = matrix[x][y-1];
+        if(above)
+            return PathDirection.Up;
+
+        const below = matrix[x][y+1];
+        if(below)
+            return PathDirection.Down;
+    }
+    else
+    {
+        const left = matrix[x-1][y];
+        if(left)
+            return PathDirection.Left;
+
+        const right = matrix[x+1][y];
+        if(right)
+            return PathDirection.Right;
+    }
+}
+
+function goToNext(matrix: Array<string[]>,  path: ICharInfo[]): void
+{
+    const current = path[path.length - 1];
+    const { x, y } = getNextPosition(current.coordinate, current.direction);
+
+    const char = matrix[x][y];
+
+    let direction  = PathDirection.None;
+
+    switch(char)
+    {
+        case PathSpecialChar.End:
+        case PathSpecialChar.Horizontal:
+        case PathSpecialChar.Vertical:
+            break;
+        default: 
+                const currentD = current.direction;
+                direction = getNextDirection(matrix, currentD, {x, y});
+            break;
+    }
+
+    path.push({
+        char,
+        coordinate: {
+            x, y
+        },
+        direction
+    });
 }
 
 function extractLettersFromString(value: string): string
@@ -75,7 +149,7 @@ function extractLettersFromString(value: string): string
     return value.replace(/[\W\d_]/g, ''); 
 }
 
-function foolowMap(map: string): IPathResult 
+function folowMap(map: string): IPathResult 
 {
     validateCharUniquenes(map, PathSpecialChar.Start);
     validateCharUniquenes(map, PathSpecialChar.End);
@@ -86,8 +160,13 @@ function foolowMap(map: string): IPathResult
 
     const startPosition = findStart(matrix);
 
+    console.log('start pos', startPosition);
+
+    pathChars.push(startPosition);
+
     while(pathChars[pathChars.length - 1].char != PathSpecialChar.End)
     {
+        goToNext(matrix, pathChars);
     }
 
     const path = pathChars.map(x => x.char).join('');
@@ -98,3 +177,5 @@ function foolowMap(map: string): IPathResult
         path
     };
 }
+
+folowMap(map1);
