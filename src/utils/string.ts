@@ -5,7 +5,7 @@ function getNoOfOccurences(searchText: string, searchPattern: string): number{
     return parts.length - 1;
 }
 
-function validateCharUniquenes(text: string, char: string)
+function validateCharUniquenes(text: string, char: string): void
 {
     const noOfChars = getNoOfOccurences(text, char);
     if(noOfChars == 0)
