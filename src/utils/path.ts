@@ -12,7 +12,7 @@ function findStart(matrix: Array<Array<string>>): IPointInfo
         if(y >= 0)
         {
             if(row[y-1] && row[y+1])
-                throw new Error('Multiple Staring paths');
+                throw new Error('Multiple staring paths');
             
             const direction = row[y-1] ? PathDirection.Left : PathDirection.Right;
 
@@ -56,27 +56,33 @@ function getNextPosition(coordinate: ICoordinate, direction: PathDirection): ICo
     };
 }
 
-function getNextDirection(matrix: Array<Array<string>>, directionFrom: PathDirection, charPosition: ICoordinate): PathDirection
+function existAndNotUsed(matrix: Array<Array<string>>, coordinate: ICoordinate, char: string, path: IPointInfo[])
+{
+    const {x, y} = coordinate;
+
+    if(matrix[x] && matrix[x][y])
+        return !path.find(point => point.char === char && point.coordinate.x === x && point.coordinate.y === point.coordinate.y );
+
+    return false;
+}
+
+function getNextDirection(matrix: Array<Array<string>>, directionFrom: PathDirection, charPosition: ICoordinate, char: string, path: IPointInfo[]): PathDirection
 {
     const {x, y} = charPosition;
     if(directionFrom === PathDirection.Left || directionFrom === PathDirection.Right)
     {
-        const above = matrix[x][y-1];
-        if(above)
+        if(existAndNotUsed(matrix, {x: x-1, y}, char, path))
             return PathDirection.Up;
 
-        const below = matrix[x][y+1];
-        if(below)
+        if(existAndNotUsed(matrix, {x: x+1, y}, char, path))
             return PathDirection.Down;
     }
     else
     {
-        const left = matrix[x-1][y];
-        if(left)
+        if(existAndNotUsed(matrix, {x: x-1, y}, char, path))
             return PathDirection.Left;
 
-        const right = matrix[x+1][y];
-        if(right)
+        if(existAndNotUsed(matrix, {x: x-1, y}, char, path))
             return PathDirection.Right;
     }
 
@@ -92,7 +98,14 @@ function goToNext(matrix: Array<Array<string>>, path: IPointInfo[]): void
     if(!char)
         throw new Error('Broken path')
 
-    let direction  = PathDirection.None;
+    let point: IPointInfo = {
+        char,
+        coordinate: {
+            x,
+            y
+        },
+        direction: PathDirection.None
+    };
 
     switch(char)
     {
@@ -102,17 +115,11 @@ function goToNext(matrix: Array<Array<string>>, path: IPointInfo[]): void
             break;
         default: 
                 const currentD = current.direction;
-                direction = getNextDirection(matrix, currentD, {x, y});
+                point.direction = getNextDirection(matrix, currentD, {x, y}, char, path);
             break;
     }
 
-    path.push({
-        char,
-        coordinate: {
-            x, y
-        },
-        direction
-    });
+    path.push(point);
 }
 
 export {

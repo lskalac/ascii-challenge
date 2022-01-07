@@ -59,11 +59,11 @@ B-+   C
 
 // o: Error
 const map8 = `
-@--A-@-+
-|
+ @--A-@-+
+        |
 x-B-+   C
-|   |
-+---+`;
+    |   |
+    +---+`;
 
 // o: Error
 const map9 = `
@@ -86,9 +86,9 @@ x+   C
 // o: Error
 const map11 = `
 @--A-+
-|
+     |
  
-B-x`;
+     B-x`;
 
 // o: Error
 const map12 = `-B-@-A-x`;
