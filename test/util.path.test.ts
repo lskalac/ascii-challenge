@@ -65,7 +65,7 @@ describe("Get next direction", () => {
 
     const matrix2 = convertToMatrix(map2);
     it("Return right from vertical with existing right value", ()  => {
-        expect(getNextDirection(matrix2, PathDirection.Up, {x: 1, y: 2}, 'x', [])).toBe(PathDirection.Right);
+        expect(getNextDirection(matrix2, PathDirection.Up, {x: 1, y: 2}, '+', [])).toBe(PathDirection.Right);
     });goToNext
 });
 
