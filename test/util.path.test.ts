@@ -1,4 +1,4 @@
-import { map1, map11, map12, map6, map8 } from "../src/data/maps";
+import { map1, map11, map12, map2, map6, map8 } from "../src/data/maps";
 import PathDirection from "../src/types/PathDirection";
 import PathSpecialChar from "../src/types/PathSpecialChar";
 import IPointInfo from "../src/types/PointInfo";
@@ -62,10 +62,10 @@ describe("Get next direction", () => {
         expect(getNextDirection(matrix, PathDirection.Up, {x: 2, y: 4}, '+', [])).toBe(PathDirection.Left);
     });
 
-    /** TODO **/
-    // it("Return right from vertical with existing right value", ()  => {
-    //     expect(getNextDirection(matrix, PathDirection.Right, {x: 0, y: 3})).toBe(PathDirection.Right);
-    // });
+    const matrix2 = convertToMatrix(map2);
+    it("Return right from vertical with existing right value", ()  => {
+        expect(getNextDirection(matrix2, PathDirection.Up, {x: 1, y: 2}, 'x', [])).toBe(PathDirection.Right);
+    });
 
     // test this somewhere else where is covered
     // const brokenMatrix = convertToMatrix(map11);

@@ -82,7 +82,7 @@ function getNextDirection(matrix: Array<Array<string>>, directionFrom: PathDirec
         if(existAndNotUsed(matrix, {x: x-1, y}, char, path))
             return PathDirection.Left;
 
-        if(existAndNotUsed(matrix, {x: x-1, y}, char, path))
+        if(existAndNotUsed(matrix, {x: x+1, y}, char, path))
             return PathDirection.Right;
     }
 
