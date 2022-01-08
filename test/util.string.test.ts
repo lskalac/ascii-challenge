@@ -1,4 +1,5 @@
-import { extractLetters, getNoOfOccurences, validateCharUniquenes } from "../src/utils/string";
+import { map14 } from "../src/data/maps";
+import { convertToMatrix, extractLetters, getNoOfOccurences, validateCharUniquenes } from "../src/utils/string";
 
 describe("Get number of occurences", () => {
     it("Should return 0 for empty string", ()  => {
@@ -33,9 +34,13 @@ describe("Validate char uniquenes", () => {
 });
 
 describe("Convert to matrix", () => {
+    it("Should convert empty string to empty array", () => {
+        expect(convertToMatrix('')).toStrictEqual([[]]);
+    });
 
-    /** TODO */
-
+    it("Should return correct array for sam map", () => {
+        expect(convertToMatrix(map14)).toStrictEqual([['@', '-', '-', 'A'], [' ',' ',' ', '|'], [' ',' ',' ','x']])
+    });
 });
 
 describe("Extract letters", () => {

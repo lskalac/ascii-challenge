@@ -37,16 +37,16 @@ function getNextPosition(coordinate: ICoordinate, direction: PathDirection): ICo
     switch(direction)
     {
         case PathDirection.Left:
-            x = x - 1;
-            break;
-        case PathDirection.Right:
-            x = x + 1;
-            break;
-        case PathDirection.Up:
             y = y - 1;
             break;
-        case PathDirection.Down:
+        case PathDirection.Right:
             y = y + 1;
+            break;
+        case PathDirection.Up:
+            x = x - 1;
+            break;
+        case PathDirection.Down:
+            x = x + 1;
             break;
     }
 
@@ -110,8 +110,10 @@ function goToNext(matrix: Array<Array<string>>, path: IPointInfo[]): void
     switch(char)
     {
         case PathSpecialChar.End:
+            break;
         case PathSpecialChar.Horizontal:
         case PathSpecialChar.Vertical:
+            point.direction = current.direction;
             break;
         default: 
                 const currentD = current.direction;

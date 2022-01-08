@@ -17,45 +17,45 @@ A |    |
 
 const map3 = `
 @---A---+
-|
+        |
 x-B-+   |
-|   |
-+---C`;
+    |   |
+    +---C`;
 
 const map4 = `
-+-O-N-+
-|     |
-|   +-I-+
+    +-O-N-+
+    |     |
+    |   +-I-+
 @-G-O-+ | | |
-| | +-+ E
-+-+     S
-        |
-        x`;
+    | | +-+ E
+    +-+     S
+            |
+            x`;
 
 const map5 = `
-+-L-+
-|  +A-+
+ +-L-+
+ |  +A-+
 @B+ ++ H
-++    x`;
+ ++    x`;
 
 
 // ------------- INVALID MAPS --------- //
 
 // o: Error
 const map6 = `
--A---+
-|
+   -A---+
+        |
 x-B-+   C
-|   |
-+---+`;
+    |   |
+    +---+`;
 
 // o: Error
 const map7 = `
 @--A---+
-|
-B-+   C
-|   |
-+---+`;
+       |
+ B-+   C
+   |   |
+   +---+`;
 
 // o: Error
 const map8 = `
@@ -67,21 +67,21 @@ x-B-+   C
 
 // o: Error
 const map9 = `
-@--A---+
-|
+ @--A---+
+        |
 x-Bx+   C
-|   |
-+---+`;
+    |   |
+    +---+`;
 
 // o: Error
 const map10 = `
-x-B
-|
+     x-B
+       |
 @--A---+
-|
-x+   C
-|   |
-+---+`;
+       |
+  x+   C
+   |   |
+   +---+`;
 
 // o: Error
 const map11 = `
@@ -96,6 +96,11 @@ const map12 = `-B-@-A-x`;
 // o: Error
 const map13 = `@-A-+-B-x`;
 
+const map14 = `
+@--A
+   |
+   x`;
+
 export {
     map1,
     map2,
@@ -109,5 +114,6 @@ export {
     map10,
     map11,
     map12,
-    map13
+    map13,
+    map14
 };
