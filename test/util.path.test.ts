@@ -1,4 +1,3 @@
-import path from "path/posix";
 import { map1, map3, map11, map12, map2, map6, map8 } from "../src/data/maps";
 import PathDirection from "../src/types/PathDirection";
 import PathSpecialChar from "../src/types/PathSpecialChar";
@@ -137,52 +136,50 @@ describe("Go to next", () => {
         expect(points).toStrictEqual([currentPoint, expectedNextPoint]);    
     });
 
-    /** TODO **/
+    it("Should should not change direction for letter that is not on turn", ()  => {
+        const currentPoint: IPointInfo = {
+            char: '|',
+            direction: PathDirection.Down,
+            coordinate: {
+                x: 1,
+                y: 8
+            }
+        };
+        const expectedNextPoint = {
+            char: 'C',
+            direction: PathDirection.Down,
+            coordinate: {
+                x: 2,
+                y: 8
+            }
+        };
+        let points: IPointInfo[] = [currentPoint];
+        goToNext(matrix, points);
+        expect(points).toStrictEqual([currentPoint, expectedNextPoint]);
+    });
 
-    // it("Should should not change direction for letter that is not on turn", ()  => {
-    //     const currentPoint: IPointInfo = {
-    //         char: '|',
-    //         direction: PathDirection.Down,
-    //         coordinate: {
-    //             x: 1,
-    //             y: 8
-    //         }
-    //     };
-    //     const expectedNextPoint = {
-    //         char: 'C',
-    //         direction: PathDirection.Down,
-    //         coordinate: {
-    //             x: 2,
-    //             y: 8
-    //         }
-    //     };
-    //     let points: IPointInfo[] = [currentPoint];
-    //     goToNext(matrix, points);
-    //     expect(points).toStrictEqual([currentPoint, expectedNextPoint]);
-    // });
-
-    // it("Should change direction for letter on the corner", ()  => {
-    //     const m = convertToMatrix(map3);
-    //     const currentPoint: IPointInfo = {
-    //         char: 'C',
-    //         direction: PathDirection.Down,
-    //         coordinate: {
-    //             x: 3,
-    //             y: 8
-    //         }
-    //     };
-    //     const expectedNextPoint = {
-    //         char: '-',
-    //         direction: PathDirection.Left,
-    //         coordinate: {
-    //             x: 3,
-    //             y: 7
-    //         }
-    //     };
-    //     let points: IPointInfo[] = [currentPoint];
-    //     goToNext(m, points);
-    //     expect(points).toStrictEqual([currentPoint, expectedNextPoint]);    
-    // });
+    it("Should change direction for letter on the corner", ()  => {
+        const m = convertToMatrix(map3);
+        const currentPoint: IPointInfo = {
+            char: '|',
+            direction: PathDirection.Down,
+            coordinate: {
+                x: 3,
+                y: 8
+            }
+        };
+        const expectedNextPoint = {
+            char: 'C',
+            direction: PathDirection.Left,
+            coordinate: {
+                x: 4,
+                y: 8
+            }
+        };
+        let points: IPointInfo[] = [currentPoint];
+        goToNext(m, points);
+        expect(points).toStrictEqual([currentPoint, expectedNextPoint]);    
+    });
 
     it("Should trow an error for a missing value(broken path)", ()  => {
         const brokenMatrix = convertToMatrix(map11);

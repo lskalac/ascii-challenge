@@ -1,5 +1,5 @@
 import { map14 } from "../src/data/maps";
-import { convertToMatrix, extractLetters, getNoOfOccurences, validateCharUniquenes } from "../src/utils/string";
+import { convertToMatrix, extractLetters, getNoOfOccurences, isEmpty, validateCharUniquenes } from "../src/utils/string";
 
 describe("Get number of occurences", () => {
     it("Should return 0 for empty string", ()  => {
@@ -54,5 +54,15 @@ describe("Extract letters", () => {
 
     it("String with no letters should return empty string", ()  => {
         expect(extractLetters("98232!!_#")).toBe("");
+    });
+});
+
+describe("Is Empty", () => {
+    it("Should return true if string contains only empty spaces", ()  => {
+        expect(isEmpty('   ')).toBe(true);
+    });
+
+    it("Should return false if string contains some value", ()  => {
+        expect(isEmpty('  dasw ')).toBe(false);
     });
 });

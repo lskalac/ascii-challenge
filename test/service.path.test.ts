@@ -28,28 +28,21 @@ describe("Follow map", () => {
         expect(followMap(map3)).toStrictEqual(expectedResult);    
     });
 
-    /** TODO */
+    it("Shouldn't collect a letter from the same location twice", ()  => {
+        const expectedResult: IPathResult = {
+            path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
+            letters: 'GOONIES'
+        };
+        expect(followMap(map4)).toStrictEqual(expectedResult);    
+    });
 
-    /** take only distinct letters by coordinate */
-
-    // it("Shouldn't collect a letter from the same location twice", ()  => {
-    //     const expectedResult: IPathResult = {
-    //         path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
-    //         letters: 'GOONIES'
-    //     };
-    //     expect(followMap(map4)).toStrictEqual(expectedResult);    
-    // });
-
-    /** TODO: This example is in contradiction with the rule: shouldn't collect a letter from the same location twice (B) is collected twice **/
-    /** logic is good but comment that when giving the task for code review */
-    /** can take into path but not in letters */
-    // it("Should keep direction even in a compact space", ()  => {
-    //     const expectedResult: IPathResult = {
-    //         path: '@B+++B|+-L-+A+++A-+Hx',
-    //         letters: 'BLAH'
-    //     };
-    //     expect(followMap(map5)).toStrictEqual(expectedResult);   
-    // });
+    it("Should keep direction even in a compact space", ()  => {
+        const expectedResult: IPathResult = {
+            path: '@B+++B|+-L-+A+++A-+Hx',
+            letters: 'BLAH'
+        };
+        expect(followMap(map5)).toStrictEqual(expectedResult);   
+    });
 
     // /*************************  INVALID CASES  ********************/
     it("Should throw an error for a map with no start", ()  => {
@@ -68,10 +61,9 @@ describe("Follow map", () => {
         expect(() => followMap(map9)).toThrow(Error);
     });
 
-    /** TODO cover this situation*/
-    // it("Should trow an error for a map with T forks", ()  => {
-    //     expect(() => followMap(map10)).toThrow(Error);
-    // });
+    it("Should trow an error for a map with T forks", ()  => {
+        expect(() => followMap(map10)).toThrow(Error);
+    });
 
     it("Should trow an error for a broken path", ()  => {
         expect(() => followMap(map11)).toThrow(Error);

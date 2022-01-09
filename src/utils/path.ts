@@ -72,12 +72,12 @@ function getNextPosition(coordinate: ICoordinate, direction: PathDirection): ICo
     };
 }
 
-function existAndNotUsed(matrix: Array<Array<string>>, coordinate: ICoordinate, char: string, path: IPointInfo[])
+function charExists(matrix: Array<Array<string>>, coordinate: ICoordinate): boolean
 {
     const {x, y} = coordinate;
 
     if(matrix[x] && (matrix[x][y]) && !isEmpty(matrix[x][y]))
-        return !path.find(point => point.char === char && point.coordinate.x === x && point.coordinate.y === y );
+        return true;
 
     return false;
 }
@@ -95,18 +95,18 @@ function getNextDirection(matrix: Array<Array<string>>, directionFrom: PathDirec
 
     if(directionFrom === PathDirection.Left || directionFrom === PathDirection.Right)
     {
-        if(existAndNotUsed(matrix, {x: x-1, y}, char, path))
+        if(charExists(matrix, {x: x-1, y}))
             return PathDirection.Up;
 
-        if(existAndNotUsed(matrix, {x: x+1, y}, char, path))
+        if(charExists(matrix, {x: x+1, y}))
             return PathDirection.Down;
     }
     else
     {
-        if(existAndNotUsed(matrix, {x, y: y-1}, char, path))
+        if(charExists(matrix, {x, y: y-1}))
             return PathDirection.Left;
 
-        if(existAndNotUsed(matrix, {x, y: y+1}, char, path))
+        if(charExists(matrix, {x, y: y+1}))
             return PathDirection.Right;
     }
 
