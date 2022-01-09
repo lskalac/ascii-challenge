@@ -138,7 +138,7 @@ describe("Go to next", () => {
 
     it("Should should not change direction for letter that is not on turn", ()  => {
         const currentPoint: IPointInfo = {
-            char: '|',
+            char: PathSpecialChar.Vertical,
             direction: PathDirection.Down,
             coordinate: {
                 x: 1,
@@ -161,7 +161,7 @@ describe("Go to next", () => {
     it("Should change direction for letter on the corner", ()  => {
         const m = convertToMatrix(map3);
         const currentPoint: IPointInfo = {
-            char: '|',
+            char: PathSpecialChar.Vertical,
             direction: PathDirection.Down,
             coordinate: {
                 x: 3,
