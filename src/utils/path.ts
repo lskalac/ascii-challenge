@@ -77,7 +77,7 @@ function existAndNotUsed(matrix: Array<Array<string>>, coordinate: ICoordinate, 
     const {x, y} = coordinate;
 
     if(matrix[x] && (matrix[x][y]) && !isEmpty(matrix[x][y]))
-        return !path.find(point => point.char === char && point.coordinate.x === x && point.coordinate.y === point.coordinate.y );
+        return !path.find(point => point.char === char && point.coordinate.x === x && point.coordinate.y === y );
 
     return false;
 }

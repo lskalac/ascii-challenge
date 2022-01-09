@@ -35,7 +35,7 @@ describe("Validate char uniquenes", () => {
 
 describe("Convert to matrix", () => {
     it("Should convert empty string to empty array", () => {
-        expect(convertToMatrix('')).toStrictEqual([[]]);
+        expect(convertToMatrix('')).toStrictEqual([]);
     });
 
     it("Should return correct array for sam map", () => {

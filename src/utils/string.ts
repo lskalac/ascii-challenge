@@ -17,7 +17,8 @@ function validateCharUniquenes(text: string, char: string): void
 
 function convertToMatrix(text: string): Array<Array<string>>
 {
-    return text.trim().split(NEW_LINE).map(x => x.split(''));
+    //return text.trim().split(NEW_LINE).map(x => x.split(''));
+    return text.split(NEW_LINE).map(x => x.split('')).filter(x => x.length);
 }
 
 function extractLetters(value: string): string

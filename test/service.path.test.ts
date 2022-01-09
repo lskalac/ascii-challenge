@@ -30,6 +30,8 @@ describe("Follow map", () => {
 
     /** TODO */
 
+    /** take only distinct letters by coordinate */
+
     // it("Shouldn't collect a letter from the same location twice", ()  => {
     //     const expectedResult: IPathResult = {
     //         path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
@@ -38,6 +40,9 @@ describe("Follow map", () => {
     //     expect(followMap(map4)).toStrictEqual(expectedResult);    
     // });
 
+    /** TODO: This example is in contradiction with the rule: shouldn't collect a letter from the same location twice (B) is collected twice **/
+    /** logic is good but comment that when giving the task for code review */
+    /** can take into path but not in letters */
     // it("Should keep direction even in a compact space", ()  => {
     //     const expectedResult: IPathResult = {
     //         path: '@B+++B|+-L-+A+++A-+Hx',
